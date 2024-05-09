@@ -1,0 +1,8 @@
+networkx==2.3
+pyemd
+tqdm
+tensorboardX
+scipy
+pyyaml
+easydict
+matplotlib

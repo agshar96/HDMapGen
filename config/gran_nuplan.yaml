@@ -1,0 +1,74 @@
+---
+exp_name: GRAN
+exp_dir: exp/GRAN
+runner: GranRunner
+use_horovod: false
+use_gpu: true
+device: cuda:0
+gpus: [0]
+seed: 1234
+dataset:
+  loader_name: GRANData
+  name: nuplan
+  data_path: data/
+  node_order: DFS # k_core/BFS/degree_decent
+  train_ratio: 0.8
+  dev_ratio: 0.2
+  num_subgraph_batch: 50 #10 # number of subgraphs per mini-batch
+  num_fwd_pass: 1
+  has_node_feat: true
+  has_sub_nodes: true # It sets has_node_feat to true.
+  num_sub_nodes: 20 # To give the number of subnodes
+  is_save_split: false
+  is_sample_subgraph: true # set to true if you want to sample subgraphs
+  is_overwrite_precompute: true
+  is_noisy: true
+  noise_std: 0.002
+  has_stop_node: true
+model:
+  name: GRANMixtureBernoulli
+  num_mix_component: 5
+  is_sym: true
+  block_size: 1
+  sample_stride: 1
+  max_num_nodes: 69
+  hidden_dim: 128
+  embedding_dim: 128
+  node_embedding_dim: 2
+  num_GNN_layers: 7
+  num_GNN_prop: 1
+  num_canonical_order: 1
+  dimension_reduce: true
+  has_attention: true
+  edge_weight: 1.0e+0
+train:
+  optimizer: Adam
+  lr_decay: 0.5
+  lr_decay_epoch: [30, 90, 150, 350, 700, 1000, 1500, 2000]
+  num_workers: 1
+  max_epoch: 5000
+  batch_size: 32
+  display_iter: 10
+  snapshot_epoch: 5
+  valid_epoch: 1
+  lr: 5.0e-4
+  wd: 0.0e-4
+  momentum: 0.9
+  shuffle: true
+  is_resume: false
+  resume_epoch: 5000
+  resume_dir: exp/GRAN/GRANMixtureBernoulli_grid_embed_2023-Dec-25-16-29-03_735116
+  resume_model: model_snapshot_0000160.pth
+test:
+  batch_size: 20
+  num_workers: 1
+  num_test_gen: 100 # number of generated samples
+  large_scale_gen: true # Temporary flag to call functions to save and plot multiple graphs
+  is_vis: true
+  num_vis: 20 # Number visualization in one graph
+  vis_num_row: 5 # visualize `num_vis` samples in `vis_num_row` rows
+  animated_vis: false
+  num_animations: 2 ## Number of graphs to save animation for
+  shuffle: true
+  test_model_dir: exp/GRAN/GRANMixtureBernoulli_nuplan_2024-Mar-02-16-11-53_2285727/
+  test_model_name: model_snapshot_0000425.pth

@@ -1,0 +1,84 @@
+dataset:
+  data_path: data/
+  dev_ratio: 0.2
+  has_node_feat: true
+  is_noisy: true
+  is_overwrite_precompute: true
+  is_sample_subgraph: true
+  is_save_split: false
+  loader_name: GRANData
+  name: grid_embed
+  node_order: DFS
+  noise_std: 0.2
+  num_fwd_pass: 1
+  num_subgraph_batch: 25
+  train_ratio: 0.8
+device: cuda:0
+exp_dir: exp/GRAN
+exp_name: GRANMixtureBernoulli_grid_embed_2024-Apr-23-15-20-33_414930
+gpus:
+- 0
+model:
+  block_size: 1
+  dimension_reduce: true
+  edge_weight: 1.0
+  embedding_dim: 128
+  has_attention: true
+  hidden_dim: 128
+  is_sym: true
+  max_num_nodes: 25
+  name: GRANMixtureBernoulli
+  node_embedding_dim: 2
+  num_GNN_layers: 7
+  num_GNN_prop: 1
+  num_canonical_order: 1
+  num_mix_component: 1
+  sample_stride: 1
+run_id: '414930'
+runner: GranRunner
+save_dir: exp/GRAN/GRANMixtureBernoulli_grid_embed_2024-Apr-23-15-20-33_414930
+seed: 1234
+test:
+  animated_vis: true
+  batch_size: 2
+  is_vis: true
+  num_animations: 2
+  num_test_gen: 2
+  num_vis: 2
+  num_workers: 1
+  shuffle: true
+  test_model_dir: exp/GRAN/GRANMixtureBernoulli_grid_embed_2024-Apr-23-15-20-33_414930
+  test_model_name: model_snapshot_0002000.pth
+  vis_num_row: 2
+train:
+  batch_size: 4
+  display_iter: 10
+  is_resume: false
+  lr: 0.0005
+  lr_decay: 0.5
+  lr_decay_epoch:
+  - 30
+  - 90
+  - 150
+  - 250
+  - 350
+  - 500
+  - 700
+  - 1000
+  - 1300
+  - 1500
+  - 1800
+  - 2000
+  max_epoch: 3000
+  momentum: 0.9
+  num_workers: 4
+  optimizer: Adam
+  resume_dir: exp/GRAN/GRANMixtureBernoulli_grid_embed_2024-Apr-23-14-18-38_4071567/
+  resume_epoch: 160
+  resume_model: model_snapshot_0003000.pth
+  shuffle: true
+  snapshot_epoch: 250
+  valid_epoch: 50
+  wd: 0.0
+use_gpu: true
+use_horovod: false
