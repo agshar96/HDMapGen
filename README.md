@@ -1,5 +1,5 @@
 
- # HDMapGen: : A Hierarchical Graph Generative Model of High Definition Maps
+ # HDMapGen: A Hierarchical Graph Generative Model of High Definition Maps
 
 This is the Pytorch reimplementation of [HDMapGen: A Hierarchical Graph Generative Model of High Definition Maps](https://arxiv.org/abs/2106.14880).
 
